@@ -10,7 +10,7 @@ let usuarioCriado;
 test("criarUsuario deve criar novo usuário", async () => {
   const result = await criarUsuario({
     nome: "João Silva",
-    email: "joao.silva@example.com",
+    email: "joao.silva1@example.com",
     senha: "senha123",
     tipo: "cliente",
   });

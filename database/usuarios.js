@@ -37,7 +37,7 @@ const deletarUsuario = async (id) => {
   const { data, error } = await supabase.from("users").delete().eq("id", id);
 
   if (error) {
-    console.error("Erro ao exluir usuário: ", error.message);
+    console.error("Erro ao excluir usuário: ", error.message);
   } else {
     console.log("Usuário exluido com sucesso!");
   }
