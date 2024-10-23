@@ -22,7 +22,7 @@ beforeAll(async () => {
 
 test("criarConta deve criar uma nova conta", async () => {
   const conta = {
-    numero_conta: "123456",
+    numero_conta: 123456,
     tipo: "corrente",
     saldo: 100.0,
     usuario_id: usuarioCriado[0].id,
