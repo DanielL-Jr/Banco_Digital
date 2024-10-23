@@ -23,7 +23,7 @@ const lerContas = async () => {
 };
 
 const verificarSaldo = async (numero) => {
-    console.log(numero);
+    console.log(`Número da conta: ${numero}`);
     const { data, error } = await supabase.from("accounts").select("*").eq("numero_conta", numero);
     if (error) {
       console.error("Erro ao consultar saldo: ", error.message);

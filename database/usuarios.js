@@ -11,7 +11,7 @@ const criarUsuario = async (usuario) => {
 };
 
 const consultarUsuario = async (id) => {
-  console.log(id);
+  console.log(`Id do usuário: ${id}`);
   const { data, error } = await supabase.from("users").select("*").eq("id", id);
   if (error) {
     console.error("Erro ao consultar usuário: ", error.message);
