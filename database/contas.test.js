@@ -45,12 +45,12 @@ test("atualizarConta deve atualizar uma conta", async () => {
   const novosDados = {
     saldo: 200.0,
   };
-  const result = await atualizarConta(contaCriada.id, novosDados);
+  const result = await atualizarConta(contaCriada.numero_conta, novosDados);
   expect(result[0].saldo).toBe(200.0);
 });
 
 test("deletarConta deve deletar uma conta", async () => {
-  const result = await deletarConta(contaCriada.id);
+  const result = await deletarConta(contaCriada.numero_conta);
   expect(result).toBeTruthy();
 });
 

@@ -23,20 +23,23 @@ const lerContas = async () => {
 };
 
 const verificarSaldo = async (numero) => {
-    console.log(`Número da conta: ${numero}`);
-    const { data, error } = await supabase.from("accounts").select("*").eq("numero_conta", numero);
-    if (error) {
-      console.error("Erro ao consultar saldo: ", error.message);
-      return null;
-    }
-    return data;
-  };
+  console.log(`Número da conta: ${numero}`);
+  const { data, error } = await supabase
+    .from("accounts")
+    .select("*")
+    .eq("numero_conta", numero);
+  if (error) {
+    console.error("Erro ao consultar saldo: ", error.message);
+    return null;
+  }
+  return data;
+};
 
-const atualizarConta = async (id, dados) => {
+const atualizarConta = async (numero_conta, dados) => {
   const { data, error } = await supabase
     .from("accounts")
     .update(dados)
-    .eq("id", id)
+    .eq("numero_conta", numero_conta)
     .select();
   if (error) {
     console.error("Erro ao atualizar conta: ", error.message);
@@ -46,24 +49,26 @@ const atualizarConta = async (id, dados) => {
   return data;
 };
 
-const deletarConta = async (id) => {
+const deletarConta = async (numeroConta) => {
   const { data, error } = await supabase
     .from("accounts")
     .delete()
-    .eq("id", id)
+    .eq("numero_conta", numeroConta)
     .select();
+
   if (error) {
     console.error("Erro ao deletar conta: ", error.message);
     return null;
   }
+
   console.log("Conta deletada com sucesso!");
   return data;
 };
 
 module.exports = {
-    criarConta,
-    lerContas,
-    verificarSaldo,
-    atualizarConta,
-    deletarConta
-}
+  criarConta,
+  lerContas,
+  verificarSaldo,
+  atualizarConta,
+  deletarConta,
+};
