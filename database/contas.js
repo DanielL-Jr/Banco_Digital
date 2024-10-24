@@ -23,7 +23,6 @@ const lerContas = async () => {
 };
 
 const verificarSaldo = async (numero) => {
-  console.log(`Número da conta: ${numero}`);
   const { data, error } = await supabase
     .from("accounts")
     .select("*")
@@ -58,7 +57,7 @@ const atualizarSaldo = async (numero_conta, valor) => {
   const { data, error } = await supabase
     .from("accounts")
     .update({
-      saldo: saldoAntigo + valor,
+      saldo: saldoNovo,
     })
     .eq("numero_conta", numero_conta)
     .select();
