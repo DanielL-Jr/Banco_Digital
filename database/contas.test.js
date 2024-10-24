@@ -4,6 +4,7 @@ const {
   lerContas,
   verificarSaldo,
   atualizarConta,
+  atualizarSaldo,
   deletarConta,
 } = require("./contas.js");
 
@@ -38,7 +39,7 @@ test("lerContas deve retornar contas", async () => {
 
 test("verificarSaldo deve retornar o saldo da conta", async () => {
   const result = await verificarSaldo(contaCriada.numero_conta);
-  expect(result[0]).toMatchObject(contaCriada);
+  expect(result).toMatchObject(contaCriada);
 });
 
 test("atualizarConta deve atualizar uma conta", async () => {
@@ -47,6 +48,16 @@ test("atualizarConta deve atualizar uma conta", async () => {
   };
   const result = await atualizarConta(contaCriada.numero_conta, novosDados);
   expect(result[0].saldo).toBe(200.0);
+});
+
+test("atualizarSaldo deve aumentar ou diminuir saldo de uma conta", async () => {
+  const transacao_simulada = await atualizarSaldo(
+    contaCriada.numero_conta,
+    100
+  );
+  const result = await verificarSaldo(contaCriada.numero_conta);
+  console.log(result);
+  expect(result.saldo).toBe(300);
 });
 
 test("deletarConta deve deletar uma conta", async () => {

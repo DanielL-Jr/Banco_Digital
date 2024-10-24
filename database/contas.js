@@ -32,7 +32,7 @@ const verificarSaldo = async (numero) => {
     console.error("Erro ao consultar saldo: ", error.message);
     return null;
   }
-  return data;
+  return data[0];
 };
 
 const atualizarConta = async (numero_conta, dados) => {
@@ -46,6 +46,27 @@ const atualizarConta = async (numero_conta, dados) => {
     return null;
   }
   console.log("Conta atualizada com sucesso!");
+  return data;
+};
+
+const atualizarSaldo = async (numero_conta, valor) => {
+  const conta = await verificarSaldo(numero_conta);
+  const saldoAntigo = conta.saldo;
+  const saldoNovo = saldoAntigo + valor;
+  console.log(`Saldo Antigo: ${saldoAntigo}`);
+  console.log(`Saldo Novo: ${saldoNovo}`)
+  const { data, error } = await supabase
+    .from("accounts")
+    .update({
+      saldo: saldoAntigo + valor,
+    })
+    .eq("numero_conta", numero_conta)
+    .select();
+  if (error) {
+    console.error("Erro ao atualizar saldo: ", error.message);
+    return null;
+  }
+  console.log("Saldo atualizado com sucesso!");
   return data;
 };
 
@@ -70,5 +91,6 @@ module.exports = {
   lerContas,
   verificarSaldo,
   atualizarConta,
+  atualizarSaldo,
   deletarConta,
 };
