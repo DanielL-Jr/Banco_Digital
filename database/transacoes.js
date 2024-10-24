@@ -26,6 +26,24 @@ const criarTransacao = async (transacao) => {
   return data;
 };
 
+const lerTransacoes = async (filtros) => {
+  let query = supabase.from('transactions').select('*');
+
+  // Aplicar filtros dinamicamente
+  for (const [chave, valor] of Object.entries(filtros)) {
+    query = query.eq(chave, valor);
+  }
+
+  const { data, error } = await query;
+  if (error) {
+    console.error("Erro ao ler transações: ", error.message);
+    return [];
+  }
+  return data;
+};
+
+
 module.exports = {
   criarTransacao,
+  lerTransacoes,
 };
