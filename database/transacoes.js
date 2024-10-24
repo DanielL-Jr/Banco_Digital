@@ -42,8 +42,22 @@ const lerTransacoes = async (filtros) => {
   return data;
 };
 
+const deletarTransacao = async (id) => {
+  const { data, error } = await supabase
+    .from("transactions")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) {
+    console.error("Erro ao deletar transação: ", error.message);
+    return null;
+  }
+  console.log("Transação deletada com sucesso!");
+  return data;
+};
 
 module.exports = {
   criarTransacao,
   lerTransacoes,
+  deletarTransacao
 };
